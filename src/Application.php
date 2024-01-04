@@ -35,14 +35,12 @@ class Application
      * @var Response
      */
     protected $response;
-
-    /***
-     * @var Controller ResourceLoader
-     */
     
+    // Resource Loader =============
     private $scripts = [];
     private $scriptDependencies = [];
     private $localizedData = [];
+    // ==============================
 
     /**
      * @var array

@@ -1,0 +1,48 @@
+/**
+ * Francesco Cappa Landing CSS
+ */
+
+.is-default{background-color:#ffffff;}
+.icon-inline{display:inline-table;}
+.hidden-link{text-decoration:none !important;}
+.quote{margin-left:6px;padding-left:9px;border-left:3px solid #F5F5F5;font-style:italic;}
+
+.media-content img{margin:0.5em 0 0 1em;float:right;}
+.media-content p{margin:0 0 0.25em 0 !important;}
+.media-content .title{margin-bottom:0.5em !important;}
+
+.footer p{font-size:0.75em;color:#606060}
+.footer a{font-size:0.75em;color:#606060}
+
+.timeline-item{
+ padding:2.7em 0 0.9em 1.8em;
+ position:relative;
+ border-left:3px solid rgba(0,0,0,0.3);
+}
+
+.timeline-item::before{
+ content:attr(date-is);
+ position:absolute;
+ display:block;
+ left:1.5em;
+ top:0.75em;
+}
+
+.timeline-item::after{
+ content:"";
+ position:absolute;
+ display:block;
+ height:18px;
+ width:18px;
+ left:-10.5px;
+ top:1em;
+ border-radius:10px;
+ border:3px solid rgba(0,0,0,0.3);
+ background:white;
+}
+
+.timeline-item:last-child{
+ border-style:solid;
+ border-width:0 0 0 3px;
+ border-image:linear-gradient(to bottom,rgba(0,0,0,0.3),transparent) 1 100%;
+}
