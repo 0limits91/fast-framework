@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html style="background-color:#F5F5F5" class="fontawesome-i2svg-active fontawesome-i2svg-complete"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Fast Framework</title>
-	
+	<title>Fast Framework</title>	
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="author" content="Francesco Cappa">
 	<meta name="keywords" content="PHP, PHP Fast Framework, REST API Framework">
@@ -17,6 +16,7 @@
 	<link rel="icon" sizes="256x256" href="./assets/logo.png">
 	<link rel="stylesheet" type="text/css" href="./assets/bulma.min.css">
 	<link rel="stylesheet" type="text/css" href="./assets/style.css">
+	<link rel="stylesheet" type="text/css" href="./assets/prism.css">
 </head>
 <body>
 <section class="section">
@@ -73,6 +73,20 @@
 									<div class="content has-text-justified">
 										<h3 class="title is-5">Getting Started</h3>
 										<p>This document provides a basic guide to using the Fast Framework for building web applications with PHP.</p>
+										<h2 class="title is-5"><li>Hello World</li></h2>
+										<p>
+											<pre>
+												<code class="language-php">
+$app = new \FastFramework\Application();
+
+$app->get('/', function ($req, $res) {
+	$res->send('Hello World!');
+});
+
+$app->run();
+												</code>
+											</pre>
+										</p>
 									</div>
 								</div>
 							</div><!-- media -->
@@ -80,7 +94,39 @@
 								<div class="media-content" id="routing">
 									<div class="content has-text-justified">
 										<h3 class="title is-5">Routing</h3>
-										<p>...</p>
+										<p>The following examples illustrate defining simple routes.</p>
+										<p><li>Respond with Hello World! on the homepage:</li></p>
+										<pre>
+											<code class="language-php">
+$app->get('/', function ($req, $res) {
+	$res->send('Hello World!');
+});
+											</code>
+										</pre>
+										<p><li>Respond to POST request on the root route (/), the application’s home page:</li></p>
+										<pre>
+											<code class="language-php">
+$app->post('/', function ($req, $res) {
+	$res->send('Got a POST request');
+});
+											</code>
+										</pre>
+										<p><li>Respond to a PUT request to the /user route:</li></p>
+										<pre>
+											<code class="language-php">
+$app->put('/user', function ($req, $res) {
+	$res->send('Got a PUT request at /user');
+});
+											</code>
+										</pre>
+										<p><li>Respond to a DELETE request to the /user route:</li></p>
+										<pre>
+											<code class="language-php">
+$app->delete('/user', function ($req, $res) {
+	$res->send('Got a DELETE request at /user');
+});
+											</code>
+										</pre>
 									</div>
 								</div>
 							</div><!-- media -->
@@ -88,7 +134,31 @@
 								<div class="media-content" id="controllers">
 									<div class="content has-text-justified">
 										<h3 class="title is-5">Controllers</h3>
-										<p>...</p>
+										<p>Example of using controller:</p>
+										<p><li>Definition of the controller</li></p>
+										<p>File: <code>controllers/example.php</code></p>
+										<pre>
+											<code class="language-php">
+namespace controllers;
+
+class example
+{
+	public function info($req, $res)
+	{
+		$res->render('info', ['title' => 'Info page']);
+	}
+}
+											</code>
+										</pre>
+										<br/>
+										<p><li>Using the controller</li></p>
+										<p>Define a GET route for the path "info.html", which is handled by the controller "example" within the namespace "controllers". The function to be called for this route is "info".</p>
+										<p>File: <code>index.php</code></p>
+										<pre>
+											<code class="language-php">
+$app->get('info.html', '\controllers\example#info');
+											</code>
+										</pre>
 									</div>
 								</div>
 							</div><!-- media -->
@@ -96,7 +166,18 @@
 								<div class="media-content" id="route_parameters">
 									<div class="content has-text-justified">
 										<h3 class="title is-5">Route Parameters</h3>
-										<p>...</p>
+										<pre>
+											<code class="language-php">
+//Defines a GET route for the path "route/:username/:id"
+$app->get('route/:username/:id', function ($req, $res) {
+	$res->send(print_r($req->params, true));
+});
+
+//Parameter access
+$username = $req->params['username'];
+$id = $req->params['id'];
+											</code>
+										</pre>
 									</div>
 								</div>
 							</div><!-- media -->
@@ -104,7 +185,20 @@
 								<div class="media-content" id="shortcodes">
 									<div class="content has-text-justified">
 										<h3 class="title is-5">Shortcodes</h3>
-										<p>...</p>
+										<pre>
+											<code class="language-php">
+//Define shortcode
+$app->shortcode('hello', function() {
+    return 'world';
+});
+
+//Using shortcode
+$app->get('/', function ($req, $res) {
+    $content = 'PHP says Hello [hello]!";
+    $res->send($content);
+});
+											</code>
+										</pre>
 									</div>
 								</div>
 							</div><!-- media -->
@@ -120,3 +214,6 @@
 		<p>© Fast Framework <script> document.write(new Date().getFullYear());</script></p>
 	</div>
 </footer>
+<script src="assets/prism.js"></script>
+</body>
+</html>
