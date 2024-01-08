@@ -4,6 +4,15 @@ include __DIR__ . '/../src/autoload.php';
 $app = new \FastFramework\Application();
 $router = new \FastFramework\Router($app);
 
+### MIDDLEWARE EXAMPLE ###
+$router->use('*',function($req, $res) {
+    $res->header('X-Service-Key', 'Example123456');
+});
+
+$router->use('/',function($req, $res) {
+    $res->header('X-Service-Key', 'Example7891011');
+});
+
 ### GET EXAMPLE ###
 $router->get('/', function ($req, $res) {
     $res->set('Content-Type', 'application/json');

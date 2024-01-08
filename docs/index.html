@@ -43,20 +43,23 @@
 						<div class="tile is-child notification is-default">
 							<h2 class="title">Documentation</h2>
 							<div class="content">
-								<div class="timeline-item" date-is="Getting Started">
+								<div class="timeline-item" date-is="getting_started">
 									<p><strong><a href="#getting_started">Getting Started</a></strong><br></p>
 								</div>
-								<div class="timeline-item" date-is="Routing">
+								<div class="timeline-item" date-is="routing">
 									<p><strong><a href="#routing">Routing</a></strong><br></p>
 								</div>
-								<div class="timeline-item" date-is="Controllers">
+								<div class="timeline-item" date-is="controllers">
 									<p><strong><a href="#controllers">Controllers</a></strong><br></p>
 								</div>
-								<div class="timeline-item" date-is="Route Parameters">
+								<div class="timeline-item" date-is="route_parameters">
 									<p><strong><a href="#route_parameters">Route Parameters</a></strong><br></p>
 								</div>
-								<div class="timeline-item" date-is="Shortcodes">
+								<div class="timeline-item" date-is="shortcodes">
 									<p><strong><a href="#shortcodes">Shortcodes</a></strong><br></p>
+								</div>
+								<div class="timeline-item" date-is="middleware">
+									<p><strong><a href="#middleware">Middleware</a></strong><br></p>
 								</div>
 							</div><!-- content -->
 						</div><!-- child -->
@@ -196,6 +199,26 @@ $app->shortcode('hello', function() {
 $app->get('/', function ($req, $res) {
     $content = 'PHP says Hello [hello]!";
     $res->send($content);
+});
+											</code>
+										</pre>
+									</div>
+								</div>
+							</div><!-- media -->
+							<div class="media">
+								<div class="media-content" id="middleware">
+									<div class="content has-text-justified">
+										<h3 class="title is-5">Middleware</h3>
+										<pre>
+											<code class="language-php">
+//Apply to all routes
+$router->use('*',function($req, $res) {
+    $res->header('X-Service-Key', 'Example123456');
+});
+
+//Apply to specific route (home)
+$router->use('/route',function($req, $res) {
+    $res->header('X-Service-Key', 'Example7891011');
 });
 											</code>
 										</pre>

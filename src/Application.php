@@ -354,7 +354,7 @@ class Application
         {
             return $this;
         }
-
+    
         $args = func_get_args();
         switch ($num_args)
         {
@@ -366,15 +366,15 @@ class Application
                 $path = $args[0];
                 $offset = 1;
         }
-
+    
         $arguments = array_slice($args, $offset);
-
+    
         $this->lazyrouter();
-
+    
         $route = $this->router->route($path);
-
-        call_user_func_array(array($route, 'use'), $arguments);
-
+    
+        call_user_func_array([$route, 'use'], $arguments);
+    
         return $this;
     }
 

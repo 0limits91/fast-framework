@@ -113,6 +113,7 @@ class Response
     {
         $this->app = $app;
         $this->headersSent = headers_sent() ? 1 : 0;
+        $this->set('X-Powered-By', 'Fast Framework');
     }
 
     /**
