@@ -43,23 +43,26 @@
 						<div class="tile is-child notification is-default">
 							<h2 class="title">Documentation</h2>
 							<div class="content">
-								<div class="timeline-item" date-is="getting_started">
+								<div class="timeline-item" date-is="Getting Started Example">
 									<p><strong><a href="#getting_started">Getting Started</a></strong><br></p>
 								</div>
 								<div class="timeline-item" date-is="routing">
 									<p><strong><a href="#routing">Routing</a></strong><br></p>
 								</div>
-								<div class="timeline-item" date-is="controllers">
+								<div class="timeline-item" date-is="Controllers Example">
 									<p><strong><a href="#controllers">Controllers</a></strong><br></p>
 								</div>
-								<div class="timeline-item" date-is="route_parameters">
+								<div class="timeline-item" date-is="Route Prameters Example">
 									<p><strong><a href="#route_parameters">Route Parameters</a></strong><br></p>
 								</div>
-								<div class="timeline-item" date-is="shortcodes">
+								<div class="timeline-item" date-is="Shortcodes Example">
 									<p><strong><a href="#shortcodes">Shortcodes</a></strong><br></p>
 								</div>
-								<div class="timeline-item" date-is="middleware">
+								<div class="timeline-item" date-is="Middleware Example">
 									<p><strong><a href="#middleware">Middleware</a></strong><br></p>
+								</div>
+								<div class="timeline-item" date-is="Database Example">
+									<p><strong><a href="#database">Database</a></strong><br></p>
 								</div>
 							</div><!-- content -->
 						</div><!-- child -->
@@ -219,6 +222,36 @@ $router->use('*',function($req, $res) {
 //Apply to specific route (home)
 $router->use('/route',function($req, $res) {
     $res->header('X-Service-Key', 'Example7891011');
+});
+											</code>
+										</pre>
+									</div>
+								</div>
+							</div><!-- media -->
+							<div class="media">
+								<div class="media-content" id="database">
+									<div class="content has-text-justified">
+										<h3 class="title is-5">Database</h3>
+										<pre>
+											<code class="language-php">
+use FastFramework\Request;
+use FastFramework\Response;
+
+$router->get('/endpoint',function(Request $req, Response $res) {
+	$database = $req->app->db;
+    
+    $data = Array ("name" => "Francesco",
+        "createdAt" =>  $database->now(),
+        "updatedAt" =>  $database->now(),
+    );
+    
+    $id = $database->insert ('tableName', $data);
+
+    $cols = Array("name");
+    $data = $database->get("tableName",null, $cols);
+
+    echo "last inserted id: $id";
+    $res->send($data);
 });
 											</code>
 										</pre>

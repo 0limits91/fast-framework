@@ -1,4 +1,7 @@
 <?php
+use FastFramework\Request;
+use FastFramework\Response;
+
 include __DIR__ . '/../src/autoload.php';
 
 $app = new \FastFramework\Application();
@@ -80,6 +83,23 @@ $router->get('shortcode', function ($req, $res) {
     $res->send($content);
 });
 
+
+$router->get('database', function(Request $req, Response $res){
+    $database = $req->app->db;
+    
+    $data = Array ("name" => "Francesco",
+        "createdAt" =>  $database->now(),
+        "updatedAt" =>  $database->now(),
+    );
+    
+    $id = $database->insert ('test', $data);
+
+    $cols = Array("name");
+    $data = $database->get("test",null, $cols);
+
+    array_push($data, Array("lastInsertedId" => $id));
+    $res->send($data);
+});
 
 //Application Start
 $router->run();

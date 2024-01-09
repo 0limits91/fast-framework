@@ -3,9 +3,17 @@ namespace FastFramework;
 
 /**
  * Class Application
- *
- * @package FastFramework
+ * @category Framework
+ * @package  FastFramework
+ * @author   Francesco Cappa <francesco.cappa.91@gmail.com>
+ * @link     http://github.com/joshcam/PHP-MySQLi-Database-Class
+ * 
+ * @version  0.0.1
  */
+
+Core::requireFile('dependencies/MysqliDb.php');
+Core::includeFile('../config/db.cofig.php');
+
 class Application
 {
     /**
@@ -36,6 +44,13 @@ class Application
      */
     protected $response;
     
+    /**
+     * @var \MysqliDb
+     */
+    public $db;
+    
+
+
     // Resource Loader =============
     private $scripts = [];
     private $scriptDependencies = [];
@@ -57,6 +72,8 @@ class Application
     {
         $this->request = new Request($this);
         $this->response = new Response($this);
+        
+        $this->db = new \MysqliDb(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT, DB_CHARSET);
     }
 
     /**
