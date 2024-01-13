@@ -101,5 +101,29 @@ $router->get('database', function(Request $req, Response $res){
     $res->send($data);
 });
 
+
+$router->get('transient', function(Request $req, Response $res){
+    $cache = $req->app->cache;
+    
+    //Get transient
+    $data = $cache->get('my_transient_key');
+    
+    if ($data !== false) {
+        $res->send("Data from cache: " . $data);
+    } else {
+        echo "Cache expired or not found.";
+    }
+
+    $cache->set('my_transient_key', 'Fast Framework cached data', 3600); //valid for 1 our
+    
+    $resData = $cache->get('my_transient_key');
+
+    // Remove transient
+    $cache->delete('my_transient_key');
+
+    $res->send($resData);
+});  
+
+
 //Application Start
 $router->run();

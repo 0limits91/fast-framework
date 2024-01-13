@@ -13,6 +13,7 @@ namespace FastFramework;
 
 Core::requireFile('dependencies/MysqliDb.php');
 Core::includeFile('../config/db.cofig.php');
+Core::includeFile('../config/cache.config.php');
 
 class Application
 {
@@ -49,7 +50,13 @@ class Application
      */
     public $db;
     
-
+    // Cache DB ====================
+    private $cacheDirectory = CACHE_DIRECTORY;
+    /**
+     * @var \MysqliDb
+     */
+    public $cache;
+    // =============================
 
     // Resource Loader =============
     private $scripts = [];
@@ -74,6 +81,9 @@ class Application
         $this->response = new Response($this);
         
         $this->db = new \MysqliDb(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT, DB_CHARSET);
+        if(CACHE_ENABLED){
+            $this->cache = new SleekDBCache($this->cacheDirectory);
+        }
     }
 
     /**
