@@ -13,3 +13,5 @@ $app->get('/', function ($req, $res) {
 
 $app->run();
 ```
+
+[For more information, read the documentation](https://www.francescocappa.it/fast-framework/docs/)
