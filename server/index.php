@@ -83,7 +83,7 @@ $router->get('shortcode', function ($req, $res) {
     $res->send($content);
 });
 
-
+### DATABASE EXAMPLE ###
 $router->get('database', function(Request $req, Response $res){
     $database = $req->app->db;
     
@@ -101,25 +101,22 @@ $router->get('database', function(Request $req, Response $res){
     $res->send($data);
 });
 
-
+### TRANSIENT EXAMPLE ###
 $router->get('transient', function(Request $req, Response $res){
     $cache = $req->app->cache;
-    
     //Get transient
     $data = $cache->get('my_transient_key');
     
     if ($data !== false) {
         $res->send("Data from cache: " . $data);
     } else {
-        echo "Cache expired or not found.";
+        //delete expired transient
+        $cache->delete('my_transient_key');
     }
 
     $cache->set('my_transient_key', 'Fast Framework cached data', 3600); //valid for 1 our
     
     $resData = $cache->get('my_transient_key');
-
-    // Remove transient
-    $cache->delete('my_transient_key');
 
     $res->send($resData);
 });  
