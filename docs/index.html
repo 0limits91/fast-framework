@@ -64,6 +64,9 @@
 								<div class="timeline-item" date-is="Database Example">
 									<p><strong><a href="#database">Database</a></strong><br></p>
 								</div>
+								<div class="timeline-item" date-is="Transient">
+									<p><strong><a href="#transient">Transient</a></strong><br></p>
+								</div>
 							</div><!-- content -->
 						</div><!-- child -->
 					</div><!-- parent -->
@@ -120,7 +123,7 @@ $app->post('/', function ($req, $res) {
 										<p><li>Respond to a PUT request to the /user route:</li></p>
 										<pre>
 											<code class="language-php">
-$app->put('/user', function ($req, $res) {
+$app->put('user', function ($req, $res) {
 	$res->send('Got a PUT request at /user');
 });
 											</code>
@@ -128,7 +131,7 @@ $app->put('/user', function ($req, $res) {
 										<p><li>Respond to a DELETE request to the /user route:</li></p>
 										<pre>
 											<code class="language-php">
-$app->delete('/user', function ($req, $res) {
+$app->delete('user', function ($req, $res) {
 	$res->send('Got a DELETE request at /user');
 });
 											</code>
@@ -253,6 +256,41 @@ $router->get('/endpoint',function(Request $req, Response $res) {
     echo "last inserted id: $id";
     $res->send($data);
 });
+											</code>
+										</pre>
+									</div>
+								</div>
+							</div><!-- media -->
+							<div class="media">
+								<div class="media-content" id="transient">
+									<div class="content has-text-justified">
+										<h3 class="title is-5">Transient</h3>
+										<pre>
+											<code class="language-php">
+use FastFramework\Request;
+use FastFramework\Response;
+
+$router->get('transient', function(Request $req, Response $res){
+    $cache = $req->app->cache;
+    
+    //Get transient
+    $data = $cache->get('my_transient_key');
+    
+    if ($data !== false) {
+        $res->send("Data from cache: " . $data);
+    } else {
+        echo "Cache expired or not found.";
+    }
+
+    $cache->set('my_transient_key', 'Fast Framework cached data', 3600); //valid for 1 our
+    
+    $resData = $cache->get('my_transient_key');
+
+    // Remove transient
+    $cache->delete('my_transient_key');
+
+    $res->send($resData);
+});  
 											</code>
 										</pre>
 									</div>
