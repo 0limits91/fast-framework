@@ -79,19 +79,19 @@ $router->get('shortcode', function ($req, $res) {
 
     $res->enqueueScript('test-script', 'js/test.js');
     $res->localizeScript('test-script', 'variableSayHello', "Hello World!");
-   
+
     $res->send($content);
 });
 
 ### DATABASE EXAMPLE ###
 $router->get('database', function(Request $req, Response $res){
     $database = $req->app->db;
-    
+
     $data = Array ("name" => "Francesco",
         "createdAt" =>  $database->now(),
         "updatedAt" =>  $database->now(),
     );
-    
+
     $id = $database->insert ('test', $data);
 
     $cols = Array("name");
@@ -106,7 +106,7 @@ $router->get('transient', function(Request $req, Response $res){
     $cache = $req->app->cache;
     //Get transient
     $data = $cache->get('my_transient_key');
-    
+
     if ($data !== false) {
         $res->send("Data from cache: " . $data);
     } else {
@@ -115,11 +115,11 @@ $router->get('transient', function(Request $req, Response $res){
     }
 
     $cache->set('my_transient_key', 'Fast Framework cached data', 3600); //valid for 1 our
-    
+
     $resData = $cache->get('my_transient_key');
 
     $res->send($resData);
-});  
+});
 
 
 //Application Start

@@ -7,7 +7,7 @@ namespace FastFramework;
  * @package  FastFramework
  * @author   Francesco Cappa <francesco.cappa.91@gmail.com>
  * @link     http://github.com/joshcam/PHP-MySQLi-Database-Class
- * 
+ *
  * @version  0.0.1
  */
 
@@ -447,7 +447,7 @@ class Response
     public function send($body): Response
     {
         $this->sendHeaders();
-        
+
         if ($body) {
             switch (true) {
                 case is_string($body):
@@ -506,7 +506,7 @@ class Response
         } elseif ($value === false) {
             $this->removeHeader($name);
         }
-        
+
         return $this;
     }
 
@@ -519,7 +519,7 @@ class Response
     protected function removeHeader(string $name): Response
     {
         header_remove($name);
-        
+
         return $this;
     }
 
@@ -626,7 +626,7 @@ class Response
 
    /**
     * The function enqueues a script in a application.
-    * 
+    *
     * @param handle The handle is a unique identifier for the script. It is used to reference the
     * script when enqueueing or dequeuing it.
     * @param src The source URL of the script file that you want to enqueue.
@@ -642,7 +642,7 @@ class Response
     /**
      * The function "localizeScript" is used to localize a script in PHP by passing the script handle,
      * object name, and data.
-     * 
+     *
      * @param handle The handle parameter is a unique identifier for the script being localized. It is
      * used to enqueue the script and to ensure that it is only localized once.
      * @param objectName The objectName parameter is the name of the JavaScript object that will be

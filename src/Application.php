@@ -7,7 +7,7 @@ namespace FastFramework;
  * @package  FastFramework
  * @author   Francesco Cappa <francesco.cappa.91@gmail.com>
  * @link     http://github.com/joshcam/PHP-MySQLi-Database-Class
- * 
+ *
  * @version  0.0.1
  */
 
@@ -44,12 +44,12 @@ class Application
      * @var Response
      */
     protected $response;
-    
+
     /**
      * @var \MysqliDb
      */
     public $db;
-    
+
     // Cache DB ====================
     private $cacheDirectory = CACHE_DIRECTORY;
     /**
@@ -79,7 +79,7 @@ class Application
     {
         $this->request = new Request($this);
         $this->response = new Response($this);
-        
+
         $this->db = new \MysqliDb(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT, DB_CHARSET);
         if(CACHE_ENABLED){
             $this->cache = new SleekDBCache($this->cacheDirectory);
@@ -223,7 +223,7 @@ class Application
         {
             extract($locals);
         }
-        
+
         $this->printScripts();
         $layout = sprintf("%s/%s.php", $this->set("views"), $view);
         $_template = sprintf("%s/%s.php", $this->set("views"), $this->set("template"));
@@ -268,7 +268,7 @@ class Application
             {
                 continue;
             }
-            
+
             $use = $route->getMethod() == "use";
             $found = 0;
 
@@ -280,7 +280,7 @@ class Application
                     $param = ':'.$paramKey;
                     if(!array_key_exists($param, $this->patterns)){
                         $this->param($paramKey, '.*');
-                    }   
+                    }
                 };
             }
 
@@ -381,7 +381,7 @@ class Application
         {
             return $this;
         }
-    
+
         $args = func_get_args();
         switch ($num_args)
         {
@@ -393,15 +393,15 @@ class Application
                 $path = $args[0];
                 $offset = 1;
         }
-    
+
         $arguments = array_slice($args, $offset);
-    
+
         $this->lazyrouter();
-    
+
         $route = $this->router->route($path);
-    
+
         call_user_func_array([$route, 'use'], $arguments);
-    
+
         return $this;
     }
 
@@ -432,11 +432,11 @@ class Application
     }
 
 
-  
+
     /**
      * The function `enqueueScript` adds a script to a list of scripts to be loaded, along with its
      * dependencies.
-     * 
+     *
      * @param handle The handle parameter is a unique identifier for the script being enqueued. It is
      * used to reference the script later when it needs to be dequeued or printed on the page.
      * @param src The `src` parameter is the source URL or file path of the script that you want to
@@ -479,12 +479,12 @@ class Application
 
    /**
     * The function checks if all the dependencies of a given script handle have been loaded.
-    * 
+    *
     * @param handle The handle parameter is a string that represents the handle of a script. It is used
     * to identify a specific script and its dependencies.
     * @param loaded The `` parameter is an array that contains the handles of the scripts that
     * have already been loaded.
-    * 
+    *
     * @return boolean value. It returns true if all the dependencies specified in the
     * `->scriptDependencies[]` array are present in the `` array. Otherwise, it
     * returns false.
@@ -498,11 +498,11 @@ class Application
         return true;
     }
 
- 
+
    /**
     * The `localizeScript` function is used to store localized data for a specific script handle
     * and object name.
-    * 
+    *
     * @param handle The handle is a unique identifier for the script being localized. It is used to
     * store the localized data in the `` array.
     * @param objectName The `objectName` parameter is a string that represents the name of the object
