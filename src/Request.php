@@ -153,7 +153,7 @@ class Request
         }
 
         $this->app = $app;
-        $this->body = &$_POST;
+        $this->body = $this->post();
         $this->cookies = &$_COOKIE;
         $this->files = &$_FILES;
         $this->hostname = $_SERVER['HTTP_HOST'];
@@ -168,6 +168,7 @@ class Request
         $this->secure = strtolower($_SERVER['REQUEST_SCHEME']) == 'https';
         $this->session = &$_SESSION;
         $this->xhr = isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest';
+        $this->headers = $this->requestHeaders();
     }
 
     /**
@@ -355,5 +356,33 @@ class Request
         list($contentType,) = explode(";", $contentType);
 
         return $contentType == $type;
+    }
+
+    function post()
+    {
+        if(!empty($_POST))
+        {
+            return $_POST;
+        }
+
+        $post = json_decode(file_get_contents('php://input'), true);
+        if(json_last_error() == JSON_ERROR_NONE)
+        {
+            return $post;
+        }
+
+        return [];
+    }
+
+    function requestHeaders() {
+        $headers = array();
+        foreach($_SERVER as $key => $value) {
+            if (substr($key, 0, 5) <> 'HTTP_') {
+                continue;
+            }
+            $header = str_replace(' ', '-', ucwords(str_replace('_', ' ', strtolower(substr($key, 5)))));
+            $headers[$header] = $value;
+        }
+        return $headers;
     }
 }
