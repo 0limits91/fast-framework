@@ -13,8 +13,6 @@ namespace FastFramework;
 
 Core::requireFile('dependencies/MysqliDb.php');
 Core::requireFile('dependencies/SleekDBCache.php');
-Core::includeFile('../config/db.cofig.php');
-Core::includeFile('../config/cache.config.php');
 
 class Application
 {
@@ -52,7 +50,7 @@ class Application
     public $db;
 
     // Cache DB ====================
-    private $cacheDirectory = CACHE_DIRECTORY;
+    private $cacheDirectory;
     /**
      * @var \MysqliDb
      */
@@ -76,13 +74,13 @@ class Application
     /**
      * Application constructor.
      */
-    public function __construct()
+    public function __construct($cacheDirectory=null)
     {
         $this->request = new Request($this);
         $this->response = new Response($this);
-
+        $this->cacheDirectory = $cacheDirectory;
         $this->db = new \MysqliDb(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT, DB_CHARSET);
-        if(CACHE_ENABLED){
+        if($this->cacheDirectory){
             $this->cache = new SleekDBCache($this->cacheDirectory);
         }
     }

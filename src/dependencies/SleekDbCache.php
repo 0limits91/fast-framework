@@ -10,8 +10,6 @@
  */
 
 namespace FastFramework;
-include_once (__DIR__ . '/../../vendor/autoload.php');
-
 class SleekDBCache {
     protected $store;
 
