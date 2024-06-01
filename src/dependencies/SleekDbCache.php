@@ -1,6 +1,16 @@
 <?php
+/**
+ * Class SleekDBCache core dependency
+ * @category Framework
+ * @package  FastFramework
+ * @author   Francesco Cappa <francesco.cappa.91@gmail.com>
+ * @link     https://github.com/0limits91/fast-framework
+ *
+ * @version  0.0.1
+ */
+
 namespace FastFramework;
-include_once (__DIR__ . '/../vendor/autoload.php');
+include_once (__DIR__ . '/../../vendor/autoload.php');
 
 class SleekDBCache {
     protected $store;

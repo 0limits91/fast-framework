@@ -12,6 +12,7 @@ namespace FastFramework;
  */
 
 Core::requireFile('dependencies/MysqliDb.php');
+Core::requireFile('dependencies/SleekDBCache.php');
 Core::includeFile('../config/db.cofig.php');
 Core::includeFile('../config/cache.config.php');
 
