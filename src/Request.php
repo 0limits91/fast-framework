@@ -138,6 +138,14 @@ class Request
      */
     public $xhr = false;
 
+   /**
+     * An associative array containing headers available to the current script.
+     *
+     * @var array
+     */
+    public $headers = array();
+
+
     /**
      * Request constructor
      *
@@ -164,8 +172,8 @@ class Request
         $this->port = (int) $_SERVER['SERVER_PORT'];
         $this->protocol = $_SERVER['SERVER_PROTOCOL'];
         $this->query = &$_GET;
-        $this->scheme = $_SERVER['REQUEST_SCHEME'];
-        $this->secure = strtolower($_SERVER['REQUEST_SCHEME']) == 'https';
+        $this->scheme = isset($_SERVER['REQUEST_SCHEME']) ? $_SERVER['REQUEST_SCHEME'] : 'http';
+        $this->secure = strtolower($this->scheme) == 'https';
         $this->session = &$_SESSION;
         $this->xhr = isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest';
         $this->headers = $this->requestHeaders();
