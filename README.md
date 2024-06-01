@@ -3,6 +3,30 @@
 # Fast-Framework
 Fast is a fast, simple, extensible framework for PHP. Fast enables you to quickly and easily build RESTful web applications.
 
+## Installation
+#### Manual installation with Composer
+Adding repository to composer.json
+```json
+    "repositories": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/0limits91/fast-framework.git"
+        }
+    ],
+```
+Updating requires in composer.json
+
+```json
+    "require": {
+        "0limits91/fast-framework": "dev-main",
+    }
+```
+Now installing Fast-Framework with Composer
+
+```bash
+composer install
+```
+
 ## Basic Example
 ```php
 include __DIR__ . '/../src/autoload.php';

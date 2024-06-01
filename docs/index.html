@@ -43,10 +43,13 @@
 						<div class="tile is-child notification is-default">
 							<h2 class="title">Documentation</h2>
 							<div class="content">
+								<div class="timeline-item" date-is="Installation">
+									<p><strong><a href="#installation">Manual Installation</a></strong><br></p>
+								</div>
 								<div class="timeline-item" date-is="Getting Started Example">
 									<p><strong><a href="#getting_started">Getting Started</a></strong><br></p>
 								</div>
-								<div class="timeline-item" date-is="routing">
+								<div class="timeline-item" date-is="Routing">
 									<p><strong><a href="#routing">Routing</a></strong><br></p>
 								</div>
 								<div class="timeline-item" date-is="Controllers Example">
@@ -77,6 +80,45 @@
 					<div class="tile is-parent">
 						<div class="tile is-child notification is-default">
 							<h2 class="title">Documentation</h2>
+							<div class="media">
+								<div class="media-content" id="installation">
+									<div class="content has-text-justified">
+										<h3 class="title is-5">Installation</h3>
+										<strong>Manual installation with Composer</strong>
+										<p class="title is-5"><li>Adding repository to composer.json</li></p>
+										<p>
+											<pre>
+												<code class="language-json">
+"repositories": [
+	{
+	"type": "vcs",
+	"url": "https://github.com/0limits91/fast-framework.git"
+	}
+],
+												</code>
+											</pre>
+										</p>
+										<p class="title is-5"><li>Updating requires in composer.json</li></p>
+										<p>
+											<pre>
+												<code class="language-json">
+"require": {
+	"0limits91/fast-framework": "dev-main",
+}
+												</code>
+											</pre>
+										</p>
+										<p class="title is-5"><li>Installing Fast-Framework with Composer</li></p>
+										<p>
+											<pre>
+												<code class="language-bash">
+composer install
+												</code>
+											</pre>
+										</p>
+									</div>
+								</div>
+							</div><!-- media -->
 							<div class="media">
 								<div class="media-content" id="getting_started">
 									<div class="content has-text-justified">
